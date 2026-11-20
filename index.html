@@ -1,0 +1,252 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Ethical Hacking — From Zero to Hero · KAIZEN._PY</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Instrument+Sans:wght@400;500&family=Sora:wght@300;400;600&family=Space+Mono&family=Syne:wght@700;800&display=swap">
+<style>
+:root{--bk:#08070D;--mp:#100B1D;--vi:#8B5CF6;--la:#B69CFF;--wh:#F5F1FF;--gr:#96909F;--ln:rgba(182,156,255,.16);color-scheme:dark;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+html{scroll-behavior:smooth;scroll-padding-top:80px;height:auto}
+*,*::before,*::after{box-sizing:border-box}
+body{margin:0;background:var(--bk);color:var(--wh);font:400 16px/1.6 'Instrument Sans',system-ui,sans-serif;overflow-x:hidden}
+a{color:inherit;text-decoration:none}
+.mono{font-family:'Space Mono',monospace;font-size:11px;letter-spacing:.14em;text-transform:uppercase}
+nav{position:fixed;top:env(safe-area-inset-top,0px);left:0;right:0;z-index:20;display:flex;justify-content:space-between;align-items:center;padding:18px clamp(18px,4vw,48px)}
+nav .brand{font:800 15px 'Syne',sans-serif;letter-spacing:.04em;display:flex;gap:10px;align-items:center}
+.logo{width:30px;height:18px;display:flex}.logo i{flex:1;background:var(--wh);border-radius:99px 0 0 99px}.logo i+i{border-radius:0 99px 99px 0;margin-left:2px}
+nav ul{display:flex;gap:6px;list-style:none;margin:0;padding:5px;border:1px solid var(--ln);border-radius:99px;background:rgba(16,11,29,.6);backdrop-filter:blur(14px)}
+nav li a{display:block;padding:7px 14px;border-radius:99px;color:var(--gr);transition:.3s}
+nav li a:hover,nav li a.on{color:var(--wh);background:rgba(139,92,246,.22)}
+@media(max-width:700px){nav .brand span{display:none}nav li a{padding:7px 10px}nav ul{gap:0}}
+.hero{position:relative;min-height:100svh;display:grid;align-content:center;padding:120px clamp(20px,6vw,80px) 90px;overflow:hidden}
+#cv{position:absolute;inset:0;width:100%;height:100%;z-index:0}
+.hero>*:not(canvas){position:relative;z-index:2}
+.badge{display:inline-block;border:1px solid var(--ln);border-radius:99px;padding:7px 14px;color:var(--la);background:rgba(16,11,29,.55);backdrop-filter:blur(8px);width:max-content;max-width:100%}
+h1{font:300 clamp(40px,9.2vw,138px)/.94 'Sora',sans-serif;letter-spacing:-.045em;margin:26px 0 0;max-width:12ch}
+h1 .l{display:block;overflow:hidden;padding-bottom:.06em}
+h1 .l span{display:block;transform:translateY(110%);animation:up 1.1s cubic-bezier(.2,.8,.2,1) forwards}
+h1 .l:nth-child(2) span{animation-delay:.12s;background:linear-gradient(90deg,var(--wh),var(--la) 60%,var(--vi));-webkit-background-clip:text;background-clip:text;color:transparent}
+@keyframes up{to{transform:none}}
+.sub{max-width:44ch;color:var(--gr);margin:26px 0 30px}
+.ctas{display:flex;gap:12px;flex-wrap:wrap}
+.btn{display:inline-flex;align-items:center;gap:10px;padding:15px 24px;border-radius:99px;border:1px solid var(--ln);font:400 11px 'Space Mono',monospace;letter-spacing:.14em;text-transform:uppercase;transition:.35s;min-height:48px;cursor:pointer;background:transparent;color:var(--wh)}
+.btn.p{background:var(--vi);border-color:var(--vi)}
+.btn.p:hover{background:var(--la);color:var(--bk);transform:translateY(-2px)}
+.btn:not(.p):hover{border-color:var(--la);background:rgba(139,92,246,.15)}
+.side{position:absolute!important;right:clamp(20px,6vw,80px);bottom:60px;max-width:230px;color:var(--gr);font-size:13px}
+.side b{display:block;color:var(--wh);font:400 17px 'Sora',sans-serif;margin-bottom:6px}
+.scrollcue{position:absolute!important;left:clamp(20px,6vw,80px);bottom:28px;color:var(--gr)}
+@media(max-width:800px){.side{display:none}h1{max-width:none}}
+section{padding:clamp(80px,12vw,160px) clamp(20px,6vw,80px);position:relative}
+.eyebrow{color:var(--la);margin-bottom:18px}
+h2{font:300 clamp(34px,6.6vw,92px)/1 'Sora',sans-serif;letter-spacing:-.04em;margin:0 0 20px;max-width:14ch}
+.lead{color:var(--gr);max-width:46ch}
+.rv{opacity:0;transform:translateY(34px);transition:opacity .9s,transform .9s cubic-bezier(.2,.8,.2,1)}
+.rv.in{opacity:1;transform:none}
+.road{background:linear-gradient(180deg,var(--bk),var(--mp) 30%,var(--bk))}
+.dash{display:grid;grid-template-columns:1fr auto;gap:20px 40px;align-items:end;margin:48px 0 40px;padding:28px;border:1px solid var(--ln);border-radius:28px;background:rgba(16,11,29,.6)}
+.pct{font:300 clamp(56px,10vw,120px)/.9 'Sora',sans-serif;letter-spacing:-.05em}
+.pct small{font-size:.35em;color:var(--la)}
+.bar{grid-column:1/-1;height:6px;background:rgba(182,156,255,.12);border-radius:9px;overflow:hidden}
+.bar i{display:block;height:100%;width:0;background:linear-gradient(90deg,var(--vi),var(--la));border-radius:9px;transition:width .8s cubic-bezier(.2,.8,.2,1)}
+.cnt{text-align:right;color:var(--gr)}.cnt b{display:block;color:var(--wh);font:400 28px 'Sora',sans-serif;letter-spacing:0}
+.ph{border-top:1px solid var(--ln)}.ph:last-of-type{border-bottom:1px solid var(--ln)}
+.hd{width:100%;display:grid;grid-template-columns:auto 1fr auto auto;gap:clamp(12px,3vw,40px);align-items:center;padding:26px 4px;background:none;border:0;color:inherit;text-align:left;cursor:pointer;font:inherit;min-height:48px}
+.num{font:300 clamp(34px,6vw,84px)/1 'Sora',sans-serif;letter-spacing:-.05em;color:transparent;-webkit-text-stroke:1px var(--la);transition:.4s}
+.hd:hover .num,.ph.open .num{color:var(--vi);-webkit-text-stroke-color:var(--vi)}
+.tt .mono{color:var(--la);display:block;margin-bottom:4px}
+.tt strong{font:400 clamp(19px,3vw,34px)/1.15 'Sora',sans-serif;letter-spacing:-.02em;display:block}
+.tt p{margin:6px 0 0;color:var(--gr);font-size:14px;max-width:46ch}
+.pp{text-align:right;color:var(--gr)}.pp b{display:block;color:var(--wh);font:400 18px 'Sora',sans-serif}
+.pp i{display:block;width:70px;height:3px;background:rgba(182,156,255,.14);margin-top:6px;border-radius:9px;overflow:hidden;margin-left:auto}
+.pp i u{display:block;height:100%;width:0;background:var(--la);transition:width .6s}
+.pl{width:34px;height:34px;border:1px solid var(--ln);border-radius:50%;position:relative;transition:.4s}
+.pl::before,.pl::after{content:"";position:absolute;left:50%;top:50%;width:12px;height:1px;background:var(--wh);transform:translate(-50%,-50%);transition:.4s}
+.pl::after{transform:translate(-50%,-50%) rotate(90deg)}
+.ph.open .pl{background:var(--vi);transform:rotate(180deg)}.ph.open .pl::after{transform:translate(-50%,-50%) rotate(0)}
+.bd{display:grid;grid-template-rows:0fr;transition:grid-template-rows .55s cubic-bezier(.2,.8,.2,1)}
+.ph.open .bd{grid-template-rows:1fr}
+.bd>div{overflow:hidden}
+ul.ls{list-style:none;margin:0;padding:0 0 28px clamp(0px,9vw,130px);display:grid;grid-template-columns:repeat(auto-fill,minmax(min(100%,300px),1fr));gap:10px}
+.ls label{display:flex;gap:14px;align-items:center;padding:14px 16px;border:1px solid var(--ln);border-radius:16px;cursor:pointer;transition:.3s;min-height:56px;background:rgba(16,11,29,.4)}
+.ls label:hover{border-color:var(--la);transform:translateX(4px)}
+.ls input{position:absolute;opacity:0;pointer-events:none}
+.ck{flex:none;width:22px;height:22px;border:1px solid var(--la);border-radius:7px;display:grid;place-items:center;transition:.3s}
+.ck svg{width:14px;stroke:var(--bk);stroke-width:3;fill:none;stroke-dasharray:20;stroke-dashoffset:20;transition:.35s}
+.ls input:checked+.ck{background:var(--la)}.ls input:checked+.ck svg{stroke-dashoffset:0}
+.ls input:focus-visible+.ck{outline:2px solid var(--wh);outline-offset:2px}
+.ls .n{font:400 11px 'Space Mono',monospace;color:var(--gr)}
+.ls .t{transition:.3s}.ls input:checked~.t{color:var(--gr);text-decoration:line-through;text-decoration-color:var(--vi)}
+.reset{margin-top:34px}
+@media(max-width:700px){.hd{grid-template-columns:auto 1fr auto}.pp{display:none}.dash{padding:22px}}
+.about{overflow:hidden}
+.glow{position:absolute;right:-12vw;top:50%;width:min(60vw,640px);aspect-ratio:1;border-radius:50%;transform:translateY(-50%);background:radial-gradient(circle at 35% 30%,#b46cff,#6d28d9 45%,#1a0b38 75%);filter:blur(4px);opacity:.75}
+.about .in2{position:relative;z-index:1}
+.handle{font:800 clamp(34px,8vw,110px)/1 'Syne',sans-serif;letter-spacing:-.02em;margin:34px 0}
+.about p{max-width:52ch;color:#cfc8de}
+.ig{margin-top:30px;padding:18px 28px;font-size:12px;background:var(--wh);color:var(--bk);border-color:var(--wh);position:relative;overflow:hidden;z-index:0}
+.ig::before{content:"";position:absolute;inset:0;background:linear-gradient(90deg,var(--vi),var(--la));transform:translateX(-101%);transition:transform .5s cubic-bezier(.2,.8,.2,1);z-index:-1}
+.ig:hover::before{transform:none}.ig:hover{color:var(--bk);transform:translateY(-3px)}
+.ig svg{width:18px;height:18px;stroke:currentColor;fill:none;stroke-width:1.8}
+.ig .ar{transition:transform .35s}.ig:hover .ar{transform:translate(3px,-3px)}
+footer{padding:70px clamp(20px,6vw,80px) 40px;border-top:1px solid var(--ln);display:grid;gap:34px}
+footer .big{font:300 clamp(24px,4.4vw,56px)/1.05 'Sora',sans-serif;letter-spacing:-.03em;max-width:20ch}
+footer .row{display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap;color:var(--gr)}
+@media(prefers-reduced-motion:reduce){*{animation:none!important;transition-duration:.01ms!important}html{scroll-behavior:auto}h1 .l span{transform:none}.rv{opacity:1;transform:none}}
+</style>
+</head>
+<body>
+<nav>
+  <a class="brand" href="#home"><span class="logo"><i></i><i></i></span><span>KAIZEN._PY</span></a>
+  <ul class="mono"><li><a href="#home" class="on">Home</a></li><li><a href="#roadmap">Roadmap</a></li><li><a href="#about">About</a></li><li><a href="https://www.instagram.com/kaizen._.py/" target="_blank" rel="noopener noreferrer">Instagram ↗</a></li></ul>
+</nav>
+
+<header class="hero" id="home">
+  <canvas id="cv" aria-hidden="true"></canvas>
+  <span class="badge mono">The Learning Roadmap / 2026</span>
+  <h1><span class="l"><span>ETHICAL HACKING</span></span><span class="l"><span>FROM ZERO TO HERO.</span></span></h1>
+  <p class="sub">A structured learning journey through networking, Linux, programming, web security, and practical cybersecurity.</p>
+  <div class="ctas">
+    <a class="btn p" href="#roadmap">Explore the roadmap ↓</a>
+    <a class="btn" href="https://www.instagram.com/kaizen._.py/" target="_blank" rel="noopener noreferrer">Follow on Instagram ↗</a>
+  </div>
+  <div class="side"><b>KAIZEN._PY</b>Five phases. Thirty lessons. One strong foundation.</div>
+  <span class="scrollcue mono">↓ Discover</span>
+</header>
+
+<section class="road" id="roadmap">
+  <div class="rv"><div class="eyebrow mono">/ 01 — The roadmap</div>
+  <h2>THE JOURNEY STARTS HERE.</h2>
+  <p class="lead">Five phases. Thirty lessons. One goal: build a strong cybersecurity foundation.</p></div>
+  <div class="dash rv">
+    <div><div class="mono" style="color:var(--gr);margin-bottom:12px">Overall progress</div><div class="pct"><span id="pct">0</span><small>%</small></div></div>
+    <div class="cnt mono"><b><span id="done">0</span> / 30</b>lessons completed</div>
+    <div class="bar" role="progressbar" aria-valuemin="0" aria-valuemax="100" id="pb"><i id="bar"></i></div>
+  </div>
+  <div id="phases"></div>
+  <button class="btn reset" id="reset" type="button">Reset progress</button>
+</section>
+
+<section class="about" id="about">
+  <div class="glow" aria-hidden="true"></div>
+  <div class="in2 rv">
+    <div class="eyebrow mono">/ 02 — The creator</div>
+    <h2>LEARN WITH ME.</h2>
+    <div class="handle">KAIZEN._PY</div>
+    <p>I’m documenting my cybersecurity learning journey, from fundamentals to practical projects.</p>
+    <p>Every concept I explore, every skill I develop, and every project I build — shared along the way.</p>
+    <a class="btn ig" href="https://www.instagram.com/kaizen._.py/" target="_blank" rel="noopener noreferrer">
+      <svg viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r=".6" fill="currentColor"/></svg>
+      Follow @KAIZEN._PY <span class="ar">↗</span>
+    </a>
+  </div>
+</section>
+
+<footer>
+  <div class="big">ETHICAL HACKING — FROM ZERO TO HERO.</div>
+  <div class="row mono"><span>Created by KAIZEN._PY</span><a href="https://www.instagram.com/kaizen._.py/" target="_blank" rel="noopener noreferrer">Instagram: @kaizen._.py ↗</a><span>Stay curious. Keep learning.</span><span>© 2026</span></div>
+</footer>
+
+<script>
+const DATA=[
+["FOUNDATION","Understanding the Internet & Networking","Learn how devices communicate and how the internet works.",["How the Internet Actually Works","What is an IP Address?","Public IP vs Private IP","What is DNS?","What are Ports?","TCP vs UDP","HTTP vs HTTPS","The OSI Model"]],
+["OPERATING SYSTEMS","Linux Fundamentals","Get comfortable with the command line, files, permissions, and processes.",["What is Linux?","The Linux File System","Essential Linux Commands","Users and Permissions","Processes and Services","Introduction to Kali Linux"]],
+["PROGRAMMING","Programming for Cybersecurity","Build programming fundamentals and learn to think programmatically.",["Why Python?","Python Fundamentals","Variables, Loops and Functions","Working with Files","Basic Networking with Python"]],
+["WEB SECURITY","Understanding Web Applications","Understand web applications and learn how to reason about their security.",["How Websites Work","What is a Web Server?","Cookies and Sessions","Authentication Basics","Introduction to OWASP Top 10","Common Web Security Vulnerabilities"]],
+["PRACTICAL CYBERSECURITY","Ethical Hacking & Security Labs","Bring your foundations together through authorised, controlled practice.",["What is Penetration Testing?","Introduction to Nmap","Understanding Vulnerability Assessment","Introduction to Burp Suite","Building Your First Security Lab"]]];
+const KEY='kaizen-roadmap-v1';let st={};
+try{st=JSON.parse(localStorage.getItem(KEY)||'{}')||{}}catch(e){st={}}
+const save=()=>{try{localStorage.setItem(KEY,JSON.stringify(st))}catch(e){}};
+const $=s=>document.querySelector(s),pad=n=>String(n).padStart(2,'0');
+let n=0,html='';
+DATA.forEach((p,i)=>{
+  html+=`<div class="ph rv${i==0?' open':''}" data-i="${i}"><button class="hd" type="button" aria-expanded="${i==0}" aria-controls="b${i}"><span class="num">${pad(i+1)}</span><span class="tt"><span class="mono">Phase ${pad(i+1)} — ${p[0]}</span><strong>${p[1]}</strong><p>${p[2]}</p></span><span class="pp"><b>0/${p[3].length}</b><i><u></u></i></span><span class="pl"></span></button><div class="bd" id="b${i}"><div><ul class="ls">`;
+  p[3].forEach(t=>{n++;html+=`<li><label><input type="checkbox" data-id="${n}"><span class="ck"><svg viewBox="0 0 16 16"><path d="M3 8.5l3.2 3L13 4.5"/></svg></span><span class="n">${pad(n)}</span><span class="t">${t}</span></label></li>`});
+  html+='</ul></div></div></div>';
+});
+$('#phases').innerHTML=html;
+function update(){
+  const all=[...document.querySelectorAll('.ls input')];let d=0;
+  all.forEach(c=>{c.checked=!!st[c.dataset.id];if(c.checked)d++});
+  document.querySelectorAll('.ph').forEach(ph=>{
+    const cs=[...ph.querySelectorAll('input')],k=cs.filter(c=>c.checked).length;
+    ph.querySelector('.pp b').textContent=k+'/'+cs.length;
+    ph.querySelector('.pp u').style.width=(k/cs.length*100)+'%';
+  });
+  const pc=Math.round(d/30*100);
+  $('#pct').textContent=pc;$('#done').textContent=d;$('#bar').style.width=pc+'%';$('#pb').setAttribute('aria-valuenow',pc);
+}
+document.addEventListener('change',e=>{
+  if(e.target.matches('.ls input')){if(e.target.checked)st[e.target.dataset.id]=1;else delete st[e.target.dataset.id];save();update()}
+});
+document.querySelectorAll('.hd').forEach(b=>b.onclick=()=>{
+  const ph=b.parentElement,o=ph.classList.toggle('open');b.setAttribute('aria-expanded',o);
+});
+$('#reset').onclick=()=>{if(confirm('Reset all progress? This cannot be undone.')){st={};save();update()}};
+update();
+
+const io=new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting){e.target.classList.add('in');io.unobserve(e.target)}}),{threshold:.12});
+document.querySelectorAll('.rv').forEach((el,i)=>{el.style.transitionDelay=(el.classList.contains('ph')?(i%5)*60:0)+'ms';io.observe(el)});
+const links=[...document.querySelectorAll('nav li a[href^="#"]')];
+const so=new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting)links.forEach(a=>a.classList.toggle('on',a.getAttribute('href')==='#'+e.target.id))}),{threshold:.4});
+['home','roadmap','about'].forEach(id=>so.observe(document.getElementById(id)));
+
+/* Hero canvas: drifting violet spheres + glass orb with orbital rings */
+const cv=$('#cv'),cx=cv.getContext('2d'),RM=matchMedia('(prefers-reduced-motion:reduce)').matches;
+let W,H,DPR,mx=0,my=0,tx=0,ty=0,vis=true;
+const orbs=[[.08,.1,.2,.5],[.28,.28,.07,.8],[.9,.72,.11,.6],[.62,.1,.045,1],[.05,.88,.06,.9],[.78,.2,.03,1.2]];
+function size(){DPR=Math.min(devicePixelRatio||1,2);W=cv.clientWidth;H=cv.clientHeight;cv.width=W*DPR;cv.height=H*DPR;cx.setTransform(DPR,0,0,DPR,0,0)}
+addEventListener('resize',size);size();
+cv.parentElement.addEventListener('pointermove',e=>{const r=cv.getBoundingClientRect();tx=(e.clientX-r.left)/W-.5;ty=(e.clientY-r.top)/H-.5});
+new IntersectionObserver(e=>vis=e[0].isIntersecting).observe(cv);
+function sphere(x,y,r,a){
+  const g=cx.createRadialGradient(x-r*.3,y-r*.35,r*.05,x,y,r);
+  g.addColorStop(0,`rgba(168,98,255,${a})`);g.addColorStop(.55,`rgba(88,28,170,${a*.9})`);g.addColorStop(1,`rgba(16,8,32,${a*.4})`);
+  cx.fillStyle=g;cx.beginPath();cx.arc(x,y,r,0,7);cx.fill();
+}
+const rings=[[1.0,.28,-.38,0],[1.1,.3,-.38,.5],[.92,.26,-.38,1],[1.18,.33,-.38,1.6]];
+function bead(x,y,r){const g=cx.createRadialGradient(x-r*.3,y-r*.3,0,x,y,r);g.addColorStop(0,'#fff');g.addColorStop(.5,'rgba(220,200,255,.85)');g.addColorStop(1,'rgba(139,92,246,.4)');cx.fillStyle=g;cx.beginPath();cx.arc(x,y,r,0,7);cx.fill()}
+function ringDraw(R,front,t,ox,oy){
+  const m=Math.min(W,H*1.3);
+  rings.forEach((rg,k)=>{
+    const rx=R*rg[0]*1.9,ry=R*rg[1]*1.9,tl=rg[2];
+    cx.strokeStyle=`rgba(190,160,255,${front?.5:.22})`;cx.lineWidth=1;cx.beginPath();
+    cx.ellipse(ox,oy,rx,ry,tl,front?0:Math.PI,front?Math.PI:Math.PI*2);cx.stroke();
+    for(let j=0;j<7;j++){
+      const a=t*(.25+k*.04)+j*(Math.PI*2/7)+rg[3];const s=Math.sin(a);
+      if((s>0)!==front)continue;
+      const px=rx*Math.cos(a),py=ry*s;
+      const x=ox+px*Math.cos(tl)-py*Math.sin(tl),y=oy+px*Math.sin(tl)+py*Math.cos(tl);
+      bead(x,y,(front?1+.35*s:.7)*(m*.007+3));
+    }
+  });
+}
+function frame(ms){
+  requestAnimationFrame(frame);if(!vis)return;
+  const t=RM?0:ms/1000;mx+=(tx-mx)*.05;my+=(ty-my)*.05;
+  cx.clearRect(0,0,W,H);
+  orbs.forEach((o,i)=>{
+    const r=o[2]*Math.min(W,H*1.6)*(W<700?.8:1);
+    const x=o[0]*W+Math.sin(t*.2+i)*18-mx*60*o[3],y=o[1]*H+Math.cos(t*.25+i*2)*18-my*60*o[3];
+    sphere(x,y,r,.9);
+  });
+  const mob=W<700,R=Math.min(W,H)*(mob?.2:.2),ox=W*(mob?.62:.64)+mx*30,oy=H*(mob?.68:.52)+my*30;
+  const gl=cx.createRadialGradient(ox,oy,0,ox,oy,R*3);gl.addColorStop(0,'rgba(139,92,246,.35)');gl.addColorStop(1,'rgba(139,92,246,0)');cx.fillStyle=gl;cx.fillRect(0,0,W,H);
+  ringDraw(R,false,t,ox,oy);
+  const pu=1+Math.sin(t*.8)*.02;
+  const g=cx.createRadialGradient(ox-R*.25,oy-R*.3,R*.05,ox,oy,R*pu);
+  g.addColorStop(0,'#f1e6ff');g.addColorStop(.25,'#c48bff');g.addColorStop(.7,'#7a35e0');g.addColorStop(1,'#2a0f55');
+  cx.fillStyle=g;cx.beginPath();
+  for(let a=0;a<=64;a++){const th=a/64*Math.PI*2,rr=R*pu*(1+.05*Math.sin(th*3+t*.7)+.03*Math.sin(th*5-t*.5));cx.lineTo(ox+Math.cos(th)*rr,oy+Math.sin(th)*rr)}
+  cx.fill();
+  cx.save();cx.globalCompositeOperation='lighter';
+  for(let a=0;a<36;a++){const th=a/36*Math.PI*2+t*.05;cx.strokeStyle=`rgba(255,235,255,${.05+.04*Math.sin(a*3)})`;cx.beginPath();cx.moveTo(ox+Math.cos(th)*R*.1,oy+Math.sin(th)*R*.1);cx.lineTo(ox+Math.cos(th)*R*.92,oy+Math.sin(th)*R*.92);cx.stroke()}
+  cx.restore();
+  ringDraw(R,true,t,ox,oy);
+}
+requestAnimationFrame(frame);
+</script>
+</body>
+</html>
